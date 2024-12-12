@@ -1,0 +1,21 @@
+.custom-thead {
+  background-color: black; /* Black background */
+  color: white; /* White text */
+}
+
+.custom-tbody {
+  background-color: gray; /* Gray background */
+  color: white; /* White text */
+}
+
+table {
+  border-collapse: collapse; /* Removes double borders */
+  width: 100%; /* Ensures full width */
+}
+
+table th,
+table td {
+  border: 1px solid #ddd; /* Light border for separation */
+  text-align: left; /* Align text to the left */
+  padding: 8px; /* Add some padding */
+}
