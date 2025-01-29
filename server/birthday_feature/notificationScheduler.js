@@ -1,8 +1,8 @@
 import cron from 'node-cron';
-import { sendEmail } from './emailService.js'; // Make sure the path is correct
-import { getTodaysBirthdays } from './birthdayService.js'; // Make sure the path is correct
+import { sendEmail } from './emailService.js'; 
+import { getTodaysBirthdays } from './birthdayService.js'; 
 
-cron.schedule('1 0 * * *', async () => { // Runs every day at 12:01 AM
+cron.schedule('1 0 * * *', async () => { 
   console.log("Running scheduled birthday check...");
   try {
       const birthdayEmployees = await getTodaysBirthdays();

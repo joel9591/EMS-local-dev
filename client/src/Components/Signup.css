@@ -3,9 +3,9 @@
 }
 
 .btn-primary:hover {
-  background-color: #048636; /* Darker blue */
-  transform: scale(1.03); /* Slightly enlarges */
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2); /* Adds a shadow */
+  background-color: #048636; 
+  transform: scale(1.03); 
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2); 
   border: none;
 }
 

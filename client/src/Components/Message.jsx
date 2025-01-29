@@ -1,4 +1,3 @@
-// src/components/Message.jsx
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -7,10 +6,10 @@ import "./Message.css";
 const Message = () => {
   const [messages, setMessages] = useState([]);
   const [messageText, setMessageText] = useState("");
-  const [receiverId, setReceiverId] = useState(""); // ID of the user to whom the message is sent
-  const userId = 1; // Replace with the logged-in user’s ID
+  const [receiverId, setReceiverId] = useState(""); 
+  const userId = 1; 
 
-  // Fetch messages between the logged-in user and selected receiver
+ 
   useEffect(() => {
     if (receiverId) {
       axios
@@ -26,9 +25,9 @@ const Message = () => {
           console.error("Error fetching messages:", error);
         });
     }
-  }, [receiverId]); // Reload messages when the receiverId changes
+  }, [receiverId]); 
 
-  // Send a new message
+  
   const sendMessage = () => {
     if (messageText.trim() !== "") {
       axios
@@ -39,7 +38,6 @@ const Message = () => {
         })
         .then((res) => {
           if (res.data.Status) {
-            // Update messages locally to display the sent message immediately
             setMessages((prev) => [
               ...prev,
               {
@@ -49,7 +47,7 @@ const Message = () => {
                 timestamp: new Date().toISOString(),
               },
             ]);
-            setMessageText(""); // Clear input field
+            setMessageText(""); 
           } else {
             alert("Message failed to send");
           }
@@ -59,7 +57,7 @@ const Message = () => {
             "Error sending message:",
             error.response ? error.response.data : error.message
           );
-          console.log("Detailed Error:", error.response?.data); // Log detailed error response
+          console.log("Detailed Error:", error.response?.data); 
           alert("Error sending message");
         });
     }
@@ -67,7 +65,6 @@ const Message = () => {
 
   return (
     <div className="message-container border-0 bg-dark text-white">
-      {/* Message display */}
       <div className="message-list bg-dark text-dark width-fit" style={{ maxHeight: '80vh', overflowY: 'auto' }}>
         {messages.map((msg, idx) => (
           <div
@@ -81,8 +78,6 @@ const Message = () => {
           </div>
         ))}
       </div>
-
-      {/* Message input */}
       <div className="message-input bg-white rounded-top d-flex align-items-center position-fixed bottom-0 custom-width p-20 m-10">
         <input 
           type="text"

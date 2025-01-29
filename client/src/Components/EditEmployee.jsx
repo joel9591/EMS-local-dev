@@ -36,7 +36,7 @@ const EditEmployee = () => {
           email: result.data.Result[0].email,
           address: result.data.Result[0].address,
           salary: result.data.Result[0].salary,
-          dob: result.data.Result[0].dob.split('T')[0], // Ensure the date is in 'YYYY-MM-DD' format
+          dob: result.data.Result[0].dob.split('T')[0], 
           category_id: result.data.Result[0].category_id,
         });
       })

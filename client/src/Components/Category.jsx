@@ -21,6 +21,15 @@ const Category = () => {
             .catch(err => console.log(err));
     };
 
+    const deleteCategory = (id) => {
+        const confirmDelete = window.confirm(
+          "Are you sure you want to delete this category?"
+        );
+        if (confirmDelete) {
+          handleDelete(id);
+        }
+      };
+
     const handleDelete = (id) => {
       axios.delete(`http://localhost:3000/auth/delete_category/${id}`)
       .then(result => {
@@ -55,7 +64,7 @@ const Category = () => {
                                     <td className='text-center'>
                                         <button
                                             className='btn btn-danger'
-                                            onClick={() => handleDelete(c.id)}
+                                            onClick={() => deleteCategory(c.id)}
                                         >
                                             Delete
                                         </button>

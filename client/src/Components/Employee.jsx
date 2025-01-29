@@ -59,7 +59,7 @@ const Employee = () => {
                 <td>
                   <img
                     src={"http://localhost:3000/Images/" + e.image}
-                    className="employee_image"
+                    className="employee_image" style={{objectFit: "cover"}}
                   />
                 </td>
                 <td>{e.email}</td>

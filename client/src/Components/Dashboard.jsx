@@ -6,17 +6,15 @@ import "./Dashboard.css";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const [adminId, setAdminId] = useState(null); // Initialize with null
+  const [adminId, setAdminId] = useState(null); 
   axios.defaults.withCredentials = true;
 
   useEffect(() => {
     const storedAdminId = localStorage.getItem("adminId");
     if (storedAdminId) {
-      setAdminId(storedAdminId); // Set adminId from localStorage
-      console.log("Admin ID retrieved from localStorage:", storedAdminId);
+      setAdminId(storedAdminId); 
     } else {
-      console.log("No Admin ID found in localStorage");
-      navigate("/"); // Redirect to login if no adminId is found
+      navigate("/"); 
     }
   }, []);
 
@@ -25,7 +23,7 @@ const Dashboard = () => {
       const result = await axios.get("http://localhost:3000/auth/logout");
       if (result.data.Status) {
         localStorage.removeItem("valid");
-        localStorage.removeItem("adminId"); // Clear adminId on logout
+        localStorage.removeItem("adminId"); 
         navigate("/");
       }
     } catch (error) {
@@ -79,7 +77,7 @@ const Dashboard = () => {
                   <span className="ms-2 d-none d-sm-inline">Category</span>
                 </Link>
               </li>
-              <li className="w-100">
+              <li className="w-100" hidden>
                 <Link
                   to="/dashboard/messages"
                   className="nav-link px-0 align-middle text-white"

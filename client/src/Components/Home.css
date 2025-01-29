@@ -1,21 +1,21 @@
 .custom-thead {
-  background-color: black; /* Black background */
-  color: white; /* White text */
+  background-color: black; 
+  color: white; 
 }
 
 .custom-tbody {
-  background-color: gray; /* Gray background */
-  color: white; /* White text */
+  background-color: gray; 
+  color: white; 
 }
 
 table {
-  border-collapse: collapse; /* Removes double borders */
-  width: 100%; /* Ensures full width */
+  border-collapse: collapse; 
+  width: 100%; 
 }
 
 table th,
 table td {
-  border: 1px solid #ddd; /* Light border for separation */
-  text-align: left; /* Align text to the left */
-  padding: 8px; /* Add some padding */
+  border: 1px solid #ddd;
+  text-align: left; 
+  padding: 8px; 
 }

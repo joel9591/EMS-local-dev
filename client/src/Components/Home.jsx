@@ -55,7 +55,7 @@ const Home = () => {
   };
 
   const handleEdit = (adminId) => {
-    navigate(`/dashboard/edit-admin/${adminId}`); // Navigate to EditAdmin page
+    navigate(`/dashboard/edit-admin/${adminId}`); 
   };
 
   const handleDelete = (adminId) => {
@@ -70,11 +70,11 @@ const Home = () => {
   const deleteAdmin = async (adminId) => {
     try {
       const response = await axios.delete(
-        `http://localhost:3000/auth/delete_admin/${adminId}` // Updated endpoint
+        `http://localhost:3000/auth/delete_admin/${adminId}` 
       );
       if (response.data.Status) {
         alert("Admin deleted successfully");
-        adminRecords(); // Refresh the admin list
+        adminRecords(); 
       } else {
         alert("Failed to delete admin: " + response.data.Error);
       }
@@ -86,7 +86,7 @@ const Home = () => {
 
   const formatDate = (date) => {
     const newDate = new Date(date);
-    return newDate.toISOString().split('T')[0]; // Extract 'YYYY-MM-DD' format
+    return newDate.toISOString().split('T')[0]; 
   };
 
   return (
@@ -112,8 +112,8 @@ const Home = () => {
           <h4 className="text-center">Salary</h4>
           <hr />
           <div className="d-flex justify-content-between">
-            <h5>Total:</h5>
-            <h5>{salaryTotal} rs</h5>
+            <h5>Total:</h5> 
+            <h5> {parseInt(salaryTotal)} rs</h5>
           </div>
         </div>
       </div>

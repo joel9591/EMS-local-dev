@@ -2,12 +2,11 @@ import mysql from 'mysql2';
 import dotenv from 'dotenv';
 
 const con = mysql.createConnection({
-    //host: process.env.DB_HOST,
     user: "root",
     password: "",
-    database: "employeems"
+    database: "employeems",
+    port: 3307,
 });
-
 con.connect((err) => {
     if (err) {
         console.error("Connection error:", err);
@@ -15,6 +14,4 @@ con.connect((err) => {
         console.log("Connected to the database");
     }
 });
-
-// Export the connection
 export default con;

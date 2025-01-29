@@ -13,7 +13,7 @@ const EditAdmin = () => {
     const fetchAdmin = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/auth/admins/${adminId}` // Adjust this if the route is different
+          `http://localhost:3000/auth/admins/${adminId}` 
         );
         if (response.data.Status) {
           setAdminName(response.data.Result.name);
@@ -43,14 +43,12 @@ const EditAdmin = () => {
       const response = await axios.put(
         `http://localhost:3000/auth/edit/${adminId}`,
         {
-          // Adjust URL to match backend
           name: adminName,
           email: adminEmail,
         }
       );
 
       if (response.data.message === "Admin updated successfully") {
-        // Check message instead of Status
         alert("Admin updated successfully");
         navigate("/dashboard");
       } else {
@@ -96,30 +94,4 @@ const EditAdmin = () => {
 
 export default EditAdmin;
 
-{
-  /* <form onSubmit={handleSubmit} className="grid gap-4">
-<input type="text" value={adminName} onChange={handleNameChange} placeholder="Admin Name" />
-<input type="email" value={adminEmail} onChange={handleEmailChange} placeholder="Admin Email" />
-<button type="submit">Update Admin</button>
-</form> */
-}
 
-{
-  /* <form>
-  <div class="form-group row text-white">
-    <label for="Admin-name" class="col-sm-2 col-form-label">Admin Name</label>
-    <div class="col-sm-10 ">
-      <input type="text" class="form-control" value={adminName} onChange={handleNameChange} placeholder="Admin Name"/>
-    </div>
-  </div>
-  <div class="form-group row text-white">
-    <label for="email" class="col-sm-2 col-form-label">Email</label>
-    <div class="col-sm-10">
-      <input type="email" value={adminEmail} onChange={handleEmailChange} class="form-control" id="inputPassword3" placeholder="email"/>
-    </div>
-  </div>
-  <div>
-  <button className=" rounded-md border-0 flex justify-center items center" type="submit">Update Admin</button>
-  </div>
-</form> */
-}

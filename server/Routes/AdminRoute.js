@@ -5,11 +5,11 @@ import bcrypt from 'bcrypt';
 import multer from "multer";
 import path from "path";
 import 'dotenv/config';
+import { verifyToken } from "../middlewares/authMiddleware.js";
+
 
 const router = express.Router();
 
-
-// Image upload
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'Public/Images');
@@ -22,20 +22,6 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 
-function authenticateToken(req, res, next) {
-    const token = req.headers['authorization']?.split(' ')[1];
-    if (!token) return res.sendStatus(401);
-
-    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-        if (err) return res.sendStatus(403);
-        req.user = user;
-        next();
-    });
-}
-
-
-
-// Function to handle SQL errors
 const handleSQLError = (err, res, customMessage) => {
     console.error(err);
     return res.json({ Status: false, Error: customMessage || "Query Error" });
@@ -106,7 +92,7 @@ router.post("/signup", upload.single("image"), (req, res) => {
 });
 
 // Edit an admin record
-router.put('/edit/:id',authenticateToken, async (req, res) => {
+router.put('/edit/:id', async (req, res) => {
     const adminId = req.params.id;
     const { email, address, dob, name } = req.body;
 
@@ -136,37 +122,29 @@ router.delete('/delete_admin/:id', (req, res) => {
     });
 });
 
-
-
-
-
 router.get('/profile/:id', (req, res) => {
     const adminId = req.params.id;
-    console.log("Admin ID received:", adminId); // Debug log
+    console.log("Admin ID received:", adminId); 
 
     if (isNaN(adminId)) {
-        console.log("Invalid admin ID"); // Debug log
+        console.log("Invalid admin ID"); 
         return res.status(400).json({ message: "Invalid admin ID" });
     }
 
     const sql = "SELECT * FROM admin WHERE id = ?";
     con.query(sql, [adminId], (err, results) => {
         if (err) {
-            console.error("Database error:", err); // Debug log
+            console.error("Database error:", err); 
             return res.status(500).json({ message: "Internal server error" });
         }
         if (results.length === 0) {
-            console.log("No admin found for ID:", adminId); // Debug log
+            console.log("No admin found for ID:", adminId); 
             return res.status(404).json({ message: "Admin not found" });
         }
         console.log("Admin found:", results[0]); // Debug log
         res.status(200).json({ message: "Admin details fetched successfully", data: results[0] });
     });
 });
-
-
-
-
 
 // Category Routes
 router.get('/category', (req, res) => {
@@ -177,7 +155,7 @@ router.get('/category', (req, res) => {
     });
 });
 
-router.post('/add_category',authenticateToken, (req, res) => {
+router.post('/add_category', verifyToken,(req, res) => {
     const sql = "INSERT INTO category (name) VALUES (?)";
     con.query(sql, [req.body.category], (err, result) => {
         if (err) return handleSQLError(err, res);
@@ -185,7 +163,7 @@ router.post('/add_category',authenticateToken, (req, res) => {
     });
 });
 
-router.delete('/delete_category/:id',authenticateToken, (req, res) => {
+router.delete('/delete_category/:id', (req, res) => {
     const id = req.params.id;
     const sql = "DELETE FROM category WHERE id = ?";
     con.query(sql, [id], (err, result) => {
@@ -301,7 +279,7 @@ router.get('/admin_records', (req, res) => {
         return res.json({ Status: true, Result: result });
     });
 });
-
+    
 // Logout
 router.get('/logout', (req, res) => {
     res.clearCookie('token');
@@ -309,4 +287,3 @@ router.get('/logout', (req, res) => {
 });
 
 export { router as adminRouter };
-
